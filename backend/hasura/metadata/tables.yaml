@@ -1,1 +1,6 @@
-[]
+- table:
+    schema: public
+    name: CodeforcesResults
+- table:
+    schema: public
+    name: Contestants
