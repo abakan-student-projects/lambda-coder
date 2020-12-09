@@ -54,6 +54,9 @@ const CodeforcesResult = sequelize.define('CodeforcesResult', {
     contestName: {
         type: DataTypes.STRING
     },
+    contestantId: {
+        type: DataTypes.INTEGER
+    },
     rank: {
         type: DataTypes.STRING
     },
@@ -72,20 +75,43 @@ const CodeforcesResult = sequelize.define('CodeforcesResult', {
 
 })
 
-sequelize.authenticate()
-    .then (function (res) {
-        console.log('Connection has been established successfully.', res);
-    })
-    .catch (function (err) {
-        console.error('Unable to connect to the database:', err);
-    })
+// sequelize.authenticate()
+//     .then (function (res) {
+//         console.log('Connection has been established successfully.', res);
+//     })
+//     .catch (function (err) {
+//         console.error('Unable to connect to the database:', err);
+//     })
 
 
 module.exports.createContestant = function (contestant) {
     return Contestant.create(contestant)
 }
 
-module.exports.createCodefocesResult = function (codeforcesResult) {
+module.exports.createCodeforcesResult = function (codeforcesResult) {
     return CodeforcesResult.create(codeforcesResult)
 }
+
+module.exports.findContestantId = function (handle) {
+    return Contestant.findOne(handle)
+}
+
+// const codeforcesResult_obj =  {
+//     contestId: 566,
+//     contestName: 'VK cup 2016',
+//     contestantId: 10,
+//     rank: 100,
+//     oldRating: 0,
+//     newRating: 0,
+//     contestantsCount: 0,  
+//     date: Date.now()          
+// }
+
+// CodeforcesResult.create(codeforcesResult_obj)
+// .then( res => {
+//     console.log(res);
+// })
+// .catch( e => {
+//     console.error(e);
+// })
     

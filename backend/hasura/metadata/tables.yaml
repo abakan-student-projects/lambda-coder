@@ -1,1 +1,15 @@
-[]
+- table:
+    schema: public
+    name: CodeforcesResults
+  object_relationships:
+  - name: contestantId_Contestants_id
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: Contestants
+        column_mapping:
+          contestantId: id
+- table:
+    schema: public
+    name: Contestants
