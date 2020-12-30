@@ -92,8 +92,20 @@ module.exports.createCodeforcesResult = function (codeforcesResult) {
     return CodeforcesResult.create(codeforcesResult)
 }
 
+module.exports.findCodeforcesResultsOfContestant = function (id) {
+    return CodeforcesResult.findAll({
+        where: {
+            contestantId: id
+        }
+    })
+}
+
 module.exports.findContestantId = function (handle) {
     return Contestant.findOne(handle)
+}
+
+module.exports.findAllContestants = function () {
+    return Contestant.findAll()
 }
 
 // const codeforcesResult_obj =  {

@@ -1,9 +1,4 @@
-const CODEFORCES_API = 'https://codeforces.com/api/',
-CF_API = {    
-    API_CONTEST_STANDING: CODEFORCES_API+'contest.standings',
-    API_USER_RATEDLIST: CODEFORCES_API+'user.ratedList',
-    API_CONTEST_STATUS: CODEFORCES_API+'contest.status',
-}
+
 
 
 api_params = {
@@ -31,8 +26,4 @@ api_params = {
         }
     }
     
-}
-module.exports = {
-    CF_API,
-    api_params
 }
