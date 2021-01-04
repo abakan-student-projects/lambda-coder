@@ -75,14 +75,8 @@ const CodeforcesResult = sequelize.define('CodeforcesResult', {
 
 })
 
-// sequelize.authenticate()
-//     .then (function (res) {
-//         console.log('Connection has been established successfully.', res);
-//     })
-//     .catch (function (err) {
-//         console.error('Unable to connect to the database:', err);
-//     })
-
+Contestant.hasMany(CodeforcesResult, {foreignKey: 'contestantId'})
+CodeforcesResult.belongsTo(Contestant, {foreignKey: 'contestantId'})
 
 module.exports.createContestant = function (contestant) {
     return Contestant.create(contestant)
@@ -107,23 +101,3 @@ module.exports.findContestantId = function (handle) {
 module.exports.findAllContestants = function () {
     return Contestant.findAll()
 }
-
-// const codeforcesResult_obj =  {
-//     contestId: 566,
-//     contestName: 'VK cup 2016',
-//     contestantId: 10,
-//     rank: 100,
-//     oldRating: 0,
-//     newRating: 0,
-//     contestantsCount: 0,  
-//     date: Date.now()          
-// }
-
-// CodeforcesResult.create(codeforcesResult_obj)
-// .then( res => {
-//     console.log(res);
-// })
-// .catch( e => {
-//     console.error(e);
-// })
-    
