@@ -1,5 +1,3 @@
-const { Route } = require("react-router-dom");
-
 function Contestant() {
     return(
         <div>

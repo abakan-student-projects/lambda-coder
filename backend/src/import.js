@@ -34,7 +34,7 @@ const run = async () => {
                     oldRating: rating?.oldRating ?? 0,
                     newRating: rating?.newRating ?? 0,
                     contestantsCount: await getNumberOfUserForContest(contestId),
-                    date: (rating != null) ? Date(rating.ratingUpdateTimeSeconds*1000) : (contest.startTimeSeconds*1000 + contest.durationSeconds*1000)
+                    date: contest.startTimeSeconds*1000
                 });
             } catch (e) {
                 console.log('ERROR: CONTEST ID = ' + contestId + '. ' + e);

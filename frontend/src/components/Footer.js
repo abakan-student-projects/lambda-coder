@@ -1,20 +1,13 @@
-import { NavLink } from "react-router-dom";
-
 function Footer() {
-    return(
-        <footer>
-            <div id="l-footer" className="uk-section uk-section-muted uk-section-xsmall">
-                <div className="uk-container">
-                    <div className="uk-text-center uk-text-small uk-first-column">
-                        <p>
-                            <NavLink className="uk-link-text" to="/">λ-coder</NavLink>&nbsp;|&nbsp;
-                            <a className="uk-link-text" href="http://lambda-calculus.ru/">lambda-calculus</a>
-                            <br/>
-                        </p>
-                    </div>
-                </div>
+    return (
+        <div className="uk-container uk-margin-top">
+            <div className="uk-text-center uk-text-small uk-first-column">
+                <p>
+                    <a href="https://github.com/abakan-student-projects/lambda-coder" className="uk-icon-button uk-margin-right" uk-icon="github"></a>
+                    <a className="uk-link-text" href="http://lambda-calculus.ru/">λ-calculus</a>
+                </p>
             </div>
-        </footer>
+        </div>
     );
 }
 

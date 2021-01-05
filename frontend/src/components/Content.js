@@ -1,19 +1,14 @@
-import { Route } from 'react-router-dom';
-import Participants from './Participants';
+import {Route, useHistory} from 'react-router-dom';
+import Contestants from './Contestants';
 import Contestant from './Contestant'
 
 function Content() {
     return(
-        <main>
-            <div id="l-content" className="uk-section uk-section-large uk-section-muted">
-                <div className="uk-container">
-                    <div className="container">
-                        <Route exact path="/" component={Participants}/>
-                        <Route path="/contestant" component={Contestant}/>
-                    </div>
-                </div>
-            </div>
-        </main>
+        <div className="uk-container uk-margin-large-top">
+            <Route exact path="/" component={Contestants}/>
+            <Route path="/leaderboard/:month" component={Contestants}/>
+            <Route path="/contestant" component={Contestant}/>
+        </div>
     )
 }
 
