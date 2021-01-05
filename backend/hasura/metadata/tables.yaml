@@ -1,1 +1,48 @@
-[]
+- table:
+    schema: public
+    name: CodeforcesResults
+  object_relationships:
+  - name: contestantId_Contestants_id
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: Contestants
+        column_mapping:
+          contestantId: id
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - id
+      - contestId
+      - contestName
+      - rank
+      - oldRating
+      - newRating
+      - contestantsCount
+      - date
+      - contestantId
+      filter: {}
+- table:
+    schema: public
+    name: Contestants
+  array_relationships:
+  - name: CodeforcesResults
+    using:
+      foreign_key_constraint_on:
+        column: contestantId
+        table:
+          schema: public
+          name: CodeforcesResults
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - id
+      - name
+      - lastname
+      - codeforceId
+      - active
+      - workOrEducationPlace
+      filter: {}
