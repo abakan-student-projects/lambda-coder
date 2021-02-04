@@ -1,6 +1,12 @@
+<<<<<<< Updated upstream
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+=======
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+/hasura/hasura.exe
+>>>>>>> Stashed changes
 # dependencies
 /node_modules
 /.pnp
@@ -21,6 +27,10 @@
 
 npm-debug.log*
 yarn-debug.log*
+<<<<<<< Updated upstream
 yarn-error.log*
 *.dev.*
 >>>>>>> 21948a36b26469c0202f8aae1782e6bda3d282c5
+=======
+yarn-error.log*
+>>>>>>> Stashed changes

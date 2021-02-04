@@ -34,7 +34,10 @@ function Contestants(props) {
     const period = getMonthPeriodByMonthString(month);
     const {data, loading, error} = useQuery(GET_CONTESTANTS_QUERY,
         {variables: {...period},});
-
+    const lastMonth = getMonthPeriodByMonthString(month, true);
+    const {data_lastMonth, loading_lastMonth, error_lastMonth} = useQuery(GET_CONTESTANTS_QUERY,
+        {variables: {...lastMonth},});
+    
     const dateFormat = new Intl.DateTimeFormat('ru', {year: 'numeric', month: 'long'});
 
     if (loading) return <div className="uk-container">
@@ -50,10 +53,10 @@ function Contestants(props) {
     const contestants = data.Contestants.map(contestant => {
         return {
             lambdaRating: contestant.CodeforcesResults.reduce((a, r) => a + 100*(r.contestantsCount - r.rank) / r.contestantsCount, 0.0),
+            lambdaRating_lastMonth: data_lastMonth.filter(c => c.id === contestant.id).CodeforcesResults.reduce((a, r) => a + 100*(r.contestantsCount - r.rank) / r.contestantsCount, 0.0),
             ...contestant
         };
     });
-
     contestants.sort((a, b) => b.lambdaRating - a.lambdaRating);
 
     return (
@@ -89,6 +92,7 @@ function Contestants(props) {
                             <td>{contestant.lastname} {contestant.name}</td>
                             <td>{contestant.workOrEducationPlace}</td>
                             <td>{contestant.lambdaRating.toFixed(2)}</td>
+                            <td><span className="uk-text-meta">{(contestant.lambdaRating - contestant.lambdaRating_lastMonth).toFixed(2)}</span></td>
                         </tr>
                     })
                 }

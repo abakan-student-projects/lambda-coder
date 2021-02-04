@@ -1,4 +1,4 @@
-const getMonthPeriodByMonthString = (monthString) => {
+const getMonthPeriodByMonthString = (monthString, lastMonth = false) => {
 
     let year, month;
     if (monthString != null) {
@@ -8,6 +8,13 @@ const getMonthPeriodByMonthString = (monthString) => {
         const d = new Date();
         year = d.getFullYear();
         month = d.getMonth();
+    }
+
+    if(lastMonth){
+        return {
+            from: new Date(year, month-1, 1, 0,0,0),
+            to: new Date(year, month, 1, 0,0,0),
+        }
     }
 
     return {
