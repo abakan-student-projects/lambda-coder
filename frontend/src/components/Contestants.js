@@ -35,13 +35,19 @@ function Contestants(props) {
     const {data, loading, error} = useQuery(GET_CONTESTANTS_QUERY,
         {variables: {...period},});
 
+    const prevMonth = getMonthPeriodByMonthString(month, true);
+    console.log(prevMonth);
+
+    const {data: data_prevMonth, loading: loading_prevMonth, error: error_prevMonth} = useQuery(GET_CONTESTANTS_QUERY,
+        {variables: {...prevMonth},});
+
     const dateFormat = new Intl.DateTimeFormat('ru', {year: 'numeric', month: 'long'});
 
-    if (loading) return <div className="uk-container">
+    if (loading || loading_prevMonth) return <div className="uk-container">
         <div uk-spinner="ratio: 3"></div>
     </div>;
 
-    if (error) return <div>Error - {error.toString()}</div>;
+    if (error || error_prevMonth) return <div>Error - {error.toString()}</div>;
 
     const DatePickerInput = ({ _, onClick }) => (
         <button className="uk-icon-button " uk-icon="calendar" onClick={onClick}></button>
@@ -50,10 +56,10 @@ function Contestants(props) {
     const contestants = data.Contestants.map(contestant => {
         return {
             lambdaRating: contestant.CodeforcesResults.reduce((a, r) => a + 100*(r.contestantsCount - r.rank) / r.contestantsCount, 0.0),
+            lambdaRating_lastMonth: data_prevMonth.Contestants.filter(c => c.id === contestant.id)[0].CodeforcesResults.reduce((a, r) => a + 100*(r.contestantsCount - r.rank) / r.contestantsCount, 0.0),
             ...contestant
         };
     });
-
     contestants.sort((a, b) => b.lambdaRating - a.lambdaRating);
 
     return (
@@ -89,6 +95,7 @@ function Contestants(props) {
                             <td>{contestant.lastname} {contestant.name}</td>
                             <td>{contestant.workOrEducationPlace}</td>
                             <td>{contestant.lambdaRating.toFixed(2)}</td>
+                            <td><span className="uk-text-meta">{(contestant.lambdaRating - contestant.lambdaRating_lastMonth).toFixed(2)}</span></td>
                         </tr>
                     })
                 }
