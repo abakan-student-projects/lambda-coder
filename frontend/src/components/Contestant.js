@@ -13,11 +13,21 @@ query GetContestant(where: {id: $id}) {
         codeforceId
         active
         workOrEducationPlace
+        CodeforcesResults(where: {id: $id}) {
+            contestName
+            rank
+            oldRating
+            newRating
+            date
+            contestantsCount
+            contestId
+          }
     }
 }
 `;
 
 function Contestant() {
+    let avatarLink = "";
     const {id} = useParams()
     const {data, loading, error} = useQuery(GET_CONTESTANT_QUERY,
         {variables:{id}})
@@ -27,8 +37,12 @@ function Contestant() {
     </div>
 
     if(error) return <div>Error - {error.toString()}</div>
-    
-    const contestant = await getContestants(data.Contestant.codeforceId);
+
+    const contests = data.Contestants.CodeforcesResults;
+
+    useEffect(() => {
+        avatarLink = await getContestants(data.Contestants.codeforceId);
+    });
 
 
     return(
@@ -54,17 +68,40 @@ function Contestant() {
                                 </tr>
                                 <tr>
                                     <th>Из организации</th>
-                                    <th>{data.Contestant.workOrEducationPlace}</th>
+                                    <th>{data.Contestants.workOrEducationPlace}</th>
                                 </tr>                        
                             </tbody>
                         </table>
                     </div>                
                     <div className="avatar">
-                        <img src= {`https:${contestant.avatar}`} width="300" height="" data-uk-img></img>
+                        <img src= {`https:${avatarLink.avatar}`} width="300" height="" data-uk-img></img>
                     </div>
                 </div>
             </div>
             <Link to="/leaderboard/:month">Назад</Link>
+            <h4>Участие в соревнованиях:</h4>
+            <table className="uk-table">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Соревнование</th>
+                        <th>Дата</th>
+                        <th>Рейтинг</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {
+                    contests.map((contest, index) => {
+                        return <tr>
+                            <td>{index+1}</td>
+                            <td>{contest.contestName}</td>
+                            <td>{contest.date}</td>
+                            <td>{contest.rank.toFixed(2)}</td>
+                        </tr>
+                    })
+                }
+                </tbody>
+            </table>
         </div>
     )
 }
