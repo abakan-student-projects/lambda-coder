@@ -18,7 +18,7 @@ function isContest(obj) {
 
 function delay() {
     return new Promise((resolve, reject) => {
-        setTimeout(resolve, 250);
+        setTimeout(resolve, 1000);
     });
 }
 
