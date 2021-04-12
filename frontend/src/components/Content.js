@@ -7,7 +7,7 @@ function Content() {
         <div className="uk-container uk-margin-large-top">
             <Route exact path="/" component={Contestants}/>
             <Route path="/leaderboard/:month" component={Contestants}/>
-            <Route path="/contestant/:id" component={Contestant}/>
+            <Route path="/contestant" component={Contestant}/>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import {gql, useQuery} from "@apollo/client";
 import {getMonthPeriodByMonthString} from "../utils";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
 import DatePicker, {registerLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -90,13 +90,13 @@ function Contestants(props) {
                 <tbody>
                 {
                     contestants.map((contestant, index) => {
-                        return <Link to={`/contestant/${contestant.id}`} className="uk-link-reset"><tr key={contestant.id}>
+                        return <tr key={contestant.id}>
                             <td>{(contestant.lambdaRating > 0) ? index+1 : null }</td>
                             <td>{contestant.lastname} {contestant.name}</td>
                             <td>{contestant.workOrEducationPlace}</td>
                             <td>{contestant.lambdaRating.toFixed(2)}</td>
                             <td><span className="uk-text-meta">{(contestant.lambdaRating - contestant.lambdaRating_lastMonth).toFixed(2)}</span></td>
-                        </tr></Link>
+                        </tr>
                     })
                 }
                 </tbody>
