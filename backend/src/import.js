@@ -4,7 +4,7 @@ const {getContestants, getContests, getContestIdsByUser, getUserRank, getNumberO
 const {isEmpty, isContest} = require('./utils')
 
 const run = async () => {
-    const dbContestants = (await db.findAllContestants()).reduce((map, c) => {
+    const dbContestants = (await db.findActiveContestants()).reduce((map, c) => {
         map.set(c.codeforceId, c);
         return map;
     }, new Map());

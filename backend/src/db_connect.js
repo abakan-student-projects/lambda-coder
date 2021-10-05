@@ -101,3 +101,12 @@ module.exports.findContestantId = function (handle) {
 module.exports.findAllContestants = function () {
     return Contestant.findAll()
 }
+
+module.exports.findActiveContestants = function () {
+    return Contestant.findAll({
+        where: {
+            active: true
+        }
+
+    })
+}
